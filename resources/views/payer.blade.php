@@ -84,7 +84,7 @@
       <form action="/requestpay" method="POST">
       <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
         <label>phone to send push STK</label><br>
-            <input type='text' onkeypress='validate(event)' name="phonenumber" placeholder="254..." maxlength="11" minlength="10" required><br><br>
+            <input type='text' onkeypress='validate(event)' name="phonenumber" placeholder="254..." maxlength="12" minlength="10" required><br><br>
         <label>Amount to request Payment</label><br>
             <input type='text' onkeypress='validate(event)' name="amount" placeholder="Ksh." maxlength="3" required><br><br>
             
