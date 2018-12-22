@@ -104,7 +104,8 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+     'key' => 'Tru8BtvxLe86Bf7IqHaVkKich1xQJYaY',
+     //This key is for testing only, production would be encrypted--- don't look at me thatway :)
 
     'cipher' => 'AES-256-CBC',
 

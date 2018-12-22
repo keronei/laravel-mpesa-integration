@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Log;
 class initiatepush extends Controller
 {
         public function pay(Request $request){
-            $Amount = $request->input('amount');
-            $phoneNumber = $request->input('phonenumber');
+            $Amount =$request->input('amount');
+            $phoneNumber =$request->input('phonenumber');
        
             $CallBackURL = 'https://integrate-payment.herokuapp.com/callback';
         
