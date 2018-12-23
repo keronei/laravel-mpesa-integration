@@ -14,7 +14,7 @@ class initiatepush extends Controller
        
             $CallBackURL = 'https://integrate-payment.herokuapp.com/callback';
         
-        
+             Log::error('INITIATION PHONE RECEIVED: '.$phoneNumber);
         
         $mpesa= new \Safaricom\Mpesa\Mpesa();
         
