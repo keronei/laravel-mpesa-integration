@@ -18,7 +18,7 @@ class initiatepush extends Controller
         
         $mpesa= new \Safaricom\Mpesa\Mpesa();
         
-        $stkPushSimulation=$mpesa->STKPushSimulation(174379, 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919', 'CustomerPayBillOnline', 1, 254710529574, 174379, 254710529574, $CallBackURL, 'Lozada General Supplies', 'lozada', 'Payment');
+        $stkPushSimulation=$mpesa->STKPushSimulation(174379, 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919', 'CustomerPayBillOnline', $Amount, $phoneNumber, 174379, $phoneNumber, $CallBackURL, 'LozadaSupplies', 'lozada', 'Payment');
 
     }
 }
