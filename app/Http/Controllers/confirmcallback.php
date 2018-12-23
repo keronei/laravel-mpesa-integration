@@ -29,7 +29,7 @@ class confirmcallback extends Controller
         $middlename=$array['MiddleName']; 
         $lastname=$array['LastName'];
         
-       // Log::info('RECEIVED TRANSAMOUNT: '.$transamount);
+        Log::error('RECEIVED INFORMATION: '.$request);
         
         DB::insert('INSERT INTO payments
                     ( 
