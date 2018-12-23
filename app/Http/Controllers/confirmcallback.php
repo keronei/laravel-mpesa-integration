@@ -14,6 +14,8 @@ class confirmcallback extends Controller
         
         $request=file_get_contents('php://input');
         
+         Log::error('RECEIVED INFORMATION: '.$request);
+        
         //process the received content into an array
         $array = json_decode($request, true);
         $transactiontype= $array['TransactionType']; 
@@ -29,7 +31,7 @@ class confirmcallback extends Controller
         $middlename=$array['MiddleName']; 
         $lastname=$array['LastName'];
         
-        Log::error('RECEIVED INFORMATION: '.$request);
+       
         
         DB::insert('INSERT INTO payments
                     ( 
