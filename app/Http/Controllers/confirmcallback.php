@@ -60,8 +60,10 @@ class confirmcallback extends Controller
                     $middlename, 
                     $lastname, 
                     $orgaccountbalance] );
+    //if execution reaches here, then all did went well!
+    return view('success', ['fname' => $firstname, 'sname' => $lastname, 'amount' => $transamount]);
                             
-    echo'{"ResultCode":0,"ResultDesc":"Confirmation received successfully"}';
+    //return '{"ResultCode":0,"ResultDesc":"Confirmation received successfully"} ';
         
     }
 }
