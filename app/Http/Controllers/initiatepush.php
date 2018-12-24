@@ -53,13 +53,12 @@ class initiatepush extends Controller
        
         if(session()->has('_paystatus')){
             echo "Something found in session!<br>".'<br>';
-          if ((session()->get('_paystatus')) == '0'){
+          if ((session()->pull('_paystatus')) == '0'){
             echo "Payment accepted successfully";
-            session()->forget('_paystatus');
+            
           }else{
-            $error_code = session()->get('_paystatus');
+            $error_code = session()->pull('_paystatus');
             echo "Payment Rejected, Please retry: error: ".$error_code;
-            session()->forget('_paystatus');
           }
         }
      

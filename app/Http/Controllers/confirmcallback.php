@@ -26,7 +26,7 @@ class confirmcallback extends Controller
             
             if ($status_result == 0){
                 
-                    session()->put('_paystatus',0);
+                    session()->put('_paystatus',strval($status_result));
             
                     $decoded_body = $decoded->Body->stkCallback->CallbackMetadata;
                     
@@ -59,7 +59,7 @@ class confirmcallback extends Controller
                    //if execution reaches here, then all did went well!
                                     }
                     else{
-                        session()->put('_paystatus',$status_result);
+                        session()->put('_paystatus',strval($status_result));
                         DB::update('UPDATE payments set
                                    
                                    ResultDesc =?,
