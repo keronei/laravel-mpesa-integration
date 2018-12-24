@@ -24,4 +24,13 @@ Route::get('/launchpayer', function(){
 
 Route::post('/requestpay','initiatepush@pay');
 
+
+Route::get('/result', function () {
+    return View::make('result', ['receipt' => 'HDYDNSKSK','amount' => 10]);
+});
+
+Route::get('/result_fail', function () {
+    return View::make('result', ['reason' => 'Wrong pin']);
+});
+
 Route::post('/callback','confirmcallback@storeResults');
