@@ -29,7 +29,7 @@ class confirmcallback extends Controller
                     
                     $specificAmount = $decoded_body->Item[0]->Value;
                     $specificMpesaReceiptNumber = $decoded_body->Item[1]->Value;
-                    $orgaccountbalance = $decoded_body->Item[2]->Value;
+                   
                     $specificTransactionDate = $decoded_body->Item[3]->Value;
                     $specificPhoneNumber = $decoded_body->Item[4]->Value;
                     
@@ -40,14 +40,14 @@ class confirmcallback extends Controller
                                    MpesaReceiptNumber,
                                    TransactionDate,
                                    PhoneNumber,
-                                   Balance
+                                 
                                    )   values (?, ?, ?, ?, ?)',
                                    [$specificAmount, 
                                    $specificMpesaReceiptNumber, 
                                    $specificTransactionDate, 
-                                   $specificPhoneNumber, 
+                                   $specificPhoneNumber
                                    
-                                   $orgaccountbalance] );
+                                  ] );
                    //if execution reaches here, then all did went well!
                    return view('result', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
                                     }
