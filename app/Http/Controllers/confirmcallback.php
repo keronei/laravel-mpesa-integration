@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use DB;
 
+Use Redirect;
+
 use Illuminate\Support\Facades\Log;
 
 
@@ -75,13 +77,7 @@ class confirmcallback extends Controller
                                   ] );
                         
                     
-                    }
-
-        finishProcess();
-    }
-    
-     public function finishProcess(){
-        return Redirect::action('initiatepush@pay', array('reason' => 'Super genius!'));
+                    }     
     }
    
 }

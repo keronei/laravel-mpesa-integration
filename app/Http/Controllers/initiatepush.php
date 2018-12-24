@@ -18,7 +18,7 @@ class initiatepush extends Controller
         
              Log::error('INITIATION PHONE RECEIVED: '.$phoneNumber);
              
-             if($phoneNumber){
+             if($Amount != 0){
         
                 $mpesa= new \Safaricom\Mpesa\Mpesa();
                 
@@ -66,7 +66,7 @@ class initiatepush extends Controller
      
         }else
         {
-        return View::make('result'); 
+        echo "Go buy some tea with that amount"; 
         }
     
     }
