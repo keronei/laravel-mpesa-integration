@@ -39,9 +39,9 @@ class confirmcallback extends Controller
                                    Amount,
                                    MpesaReceiptNumber,
                                    TransactionDate,
-                                   PhoneNumber,
+                                   PhoneNumber
                                  
-                                   )   values (?, ?, ?, ?, ?)',
+                                   )   values (?, ?, ?, ?)',
                                    [$specificAmount, 
                                    $specificMpesaReceiptNumber, 
                                    $specificTransactionDate, 
