@@ -79,11 +79,13 @@
         <body>
         <div class="content">
            <div class="title m-b-md">
-                    Pay Here
+                    Results:
                 </div>
-       @if(!empty($firstname))
-           <p>Payment received from <?= $firstname $lastname amount: $transamount ?><p>
-       @endif
+       @if(!empty($receipt))
+           <p>Payment received with receipt <?= $receipt ?> amount: <?= $amount ?><p>
+       @elseif(!empty($reason))
+           <p>Payment failed with <?= $reason ?></p>
+        @endif
         </div>
         </body>
 </html        

@@ -17,53 +17,44 @@ class confirmcallback extends Controller
          Log::error('RECEIVED INFORMATION: '.$request);
         
         //process the received content into an array
-        $array = json_decode($request, true);
-        $transactiontype= $array['TransactionType']; 
-        $transid=$array['TransID']; 
-        $transtime=$array['TransTime']; 
-        $transamount=$array['TransAmount']; 
-        $businessshortcode=$array['BusinessShortCode']; 
-        $billrefno=$array['BillRefNumber']; 
-        $invoiceno=$array['InvoiceNumber']; 
-        $msisdn=$array['MSISDN']; 
-        $orgaccountbalance=$array['OrgAccountBalance']; 
-        $firstname=$array['FirstName']; 
-        $middlename=$array['MiddleName']; 
-        $lastname=$array['LastName'];
-        
-       
-        
-        DB::insert('INSERT INTO payments
-                    ( 
-                    TransactionType,
-                    TransID,
-                    TransTime,
-                    TransAmount,
-                    BusinessShortCode,
-                    BillRefNumber,
-                    InvoiceNumber,
-                    MSISDN,
-                    FirstName,
-                    MiddleName,
-                    LastName,
-                    OrgAccountBalance
-                    )   values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                    [$transactiontype, 
-                    $transid, 
-                    $transtime, 
-                    $transamount, 
-                    $businessshortcode, 
-                    $billrefno, 
-                    $invoiceno, 
-                    $msisdn,
-                    $firstname, 
-                    $middlename, 
-                    $lastname, 
-                    $orgaccountbalance] );
-    //if execution reaches here, then all did went well!
-    return view('success', ['fname' => $firstname, 'sname' => $lastname, 'amount' => $transamount]);
-                            
-    //return '{"ResultCode":0,"ResultDesc":"Confirmation received successfully"} ';
+        $decoded = json_decode($response);
+
+            $status_result = $decoded->Body->stkCallback->ResultCode;
+            
+            $status_result_desc = $decoded->Body->stkCallback->ResultDesc;
+            
+            if ($status_result == 0){
+            
+                    $decoded_body = $decoded->Body->stkCallback->CallbackMetadata;
+                    
+                    $specificAmount = $decoded_body->Item[0]->Value;
+                    $specificMpesaReceiptNumber = $decoded_body->Item[1]->Value;
+                    $orgaccountbalance = $decoded_body->Item[2]->Value;
+                    $specificTransactionDate = $decoded_body->Item[3]->Value;
+                    $specificPhoneNumber = $decoded_body->Item[4]->Value;
+                    
+    
+                    DB::insert('INSERT INTO payments
+                                   ( 
+                                   Amount,
+                                   MpesaReceiptNumber,
+                                   TransactionDate,
+                                   PhoneNumber,
+                                   Balance
+                                   )   values (?, ?, ?, ?, ?)',
+                                   [$specificAmount, 
+                                   $specificMpesaReceiptNumber, 
+                                   $specificTransactionDate, 
+                                   $specificPhoneNumber, 
+                                   
+                                   $orgaccountbalance] );
+                   //if execution reaches here, then all did went well!
+                   return view('success', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
+                                    }
+                    else{
+                        return view('success', ['reason' => $status_result_desc]);
+                    }
+
         
     }
 }
