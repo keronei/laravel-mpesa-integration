@@ -52,6 +52,7 @@ class confirmcallback extends Controller
                    return view('result', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
                                     }
                     else{
+                        
                         return view('result', ['reason' => $status_result_desc]);
                     }
 
