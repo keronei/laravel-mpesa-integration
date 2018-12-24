@@ -22,8 +22,11 @@ class confirmcallback extends Controller
             $status_result = $decoded->Body->stkCallback->ResultCode;
             
             $status_result_desc = $decoded->Body->stkCallback->ResultDesc;
+            $CheckoutRequestID = $decoded->Body->stkCallback->CheckoutRequestID;
             
             if ($status_result == 0){
+                
+                    session()->put('_paystatus',0);
             
                     $decoded_body = $decoded->Body->stkCallback->CallbackMetadata;
                     
@@ -34,29 +37,46 @@ class confirmcallback extends Controller
                     $specificPhoneNumber = $decoded_body->Item[4]->Value;
                     
     
-                    DB::insert('INSERT INTO payments
-                                   ( 
-                                   Amount,
-                                   MpesaReceiptNumber,
-                                   TransactionDate,
-                                   PhoneNumber
+                    DB::update('UPDATE payments set
+                                   
+                                   Amount =?,
+                                   MpesaReceiptNumber =?,
+                                   TransactionDate =?,
+                                   PhoneNumber =?,
+                                   ResultCode = ?
                                  
-                                   )   values (?, ?, ?, ?)',
+                                   where CheckoutRequestID = ?',
                                    [$specificAmount, 
                                    $specificMpesaReceiptNumber, 
                                    $specificTransactionDate, 
-                                   $specificPhoneNumber
+                                   $specificPhoneNumber,
+                                   $status_result,
+                                   $CheckoutRequestID
                                    
                                   ] );
+                    
+                 
                    //if execution reaches here, then all did went well!
-                     redirect('result')->with('status', 'Payment completed Successfully!');
-                   //return view('result', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
                                     }
                     else{
-                     redirect('result_fail')->with('status', 'Payment failed!');
-                       // return view('result', ['reason' => $status_result_desc]);
+                        session()->put('_paystatus',$status_result);
+                        DB::update('UPDATE payments set
+                                   
+                                   ResultDesc =?,
+                                   ResultCode = ?
+                                 
+                                   where CheckoutRequestID = ?',
+                                   [
+                                    $status_result_desc,
+                                    $status_result,
+                                   $CheckoutRequestID
+                                   
+                                  ] );
+                        
+                    
                     }
 
         
     }
+   
 }
