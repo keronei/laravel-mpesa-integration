@@ -49,10 +49,11 @@ class confirmcallback extends Controller
                                    
                                   ] );
                    //if execution reaches here, then all did went well!
+                    return redirect('result')->with('status', 'Payment completed Successfully!');
                    return view('result', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
                                     }
                     else{
-                        
+                         return redirect('result_fail')->with('status', 'Payment failed!');
                         return view('result', ['reason' => $status_result_desc]);
                     }
 
