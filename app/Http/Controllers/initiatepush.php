@@ -25,6 +25,6 @@ class initiatepush extends Controller
     }
     
     public function finishProcess(){
-        //
+        
     }
 }
