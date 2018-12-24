@@ -17,7 +17,7 @@ class confirmcallback extends Controller
          Log::error('RECEIVED INFORMATION: '.$request);
         
         //process the received content into an array
-        $decoded = json_decode($response);
+        $decoded = json_decode($request);
 
             $status_result = $decoded->Body->stkCallback->ResultCode;
             
@@ -49,10 +49,10 @@ class confirmcallback extends Controller
                                    
                                    $orgaccountbalance] );
                    //if execution reaches here, then all did went well!
-                   return view('success', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
+                   return view('result', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
                                     }
                     else{
-                        return view('success', ['reason' => $status_result_desc]);
+                        return view('result', ['reason' => $status_result_desc]);
                     }
 
         
