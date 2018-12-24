@@ -8,6 +8,7 @@ use DB;
 
 use Illuminate\Support\Facades\Log;
 
+
 class confirmcallback extends Controller
 {
     public function storeResults(Request $requests){
@@ -76,7 +77,11 @@ class confirmcallback extends Controller
                     
                     }
 
-        
+        finishProcess();
+    }
+    
+     public function finishProcess(){
+        return Redirect::action('initiatepush@pay', array('reason' => 'Super genius!'));
     }
    
 }
