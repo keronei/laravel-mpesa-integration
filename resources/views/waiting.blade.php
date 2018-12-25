@@ -73,7 +73,7 @@
                         async: true,
                         success: function(data) {
                          console.log(data);
-                            if (data.status == "success") {
+                            
  
                                console.log(data);
                                
@@ -101,7 +101,7 @@
                              
                             }
                            
-                        }
+                        
                     });
                 },2000);
                 }
