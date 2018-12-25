@@ -72,19 +72,19 @@
                         method: 'GET',
                         async: true,
                         success: function(data) {
-                         console.log(data);
+                         console.log(data[0]);
                                                           
-                               switch(data) {
-                                    case  '0':
+                               switch(data[0]) {
+                                    case  0:
                                       console.log('PAID');
                                       window.alert('payment accepted!');
                                       status_completion = true;
                                       clearInterval(refreshIntervalId);
                                       break;
-                                    case '1':
+                                    case 1:
                                       console.log('pending...');
                                       break;
-                                    case '2':
+                                    case 2:
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
                                       status_completion = true;
