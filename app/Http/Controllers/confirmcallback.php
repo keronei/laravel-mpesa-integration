@@ -84,7 +84,9 @@ class confirmcallback extends Controller
                     }     
     }
      public function check(Request $request, $CheckoutRequestID){
-         return DB::select('select status from payments where CheckoutRequestID =?',[$CheckoutRequestID]);
+         $state_ =  DB::select('select status from payments where CheckoutRequestID =?',[$CheckoutRequestID]);
+         Log::error('RECEIVED STATE INFORMATION FROM AJAX CALL: '.$state_);
+         return $state_;
      }
    
 }
