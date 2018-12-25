@@ -84,8 +84,8 @@ class confirmcallback extends Controller
                     }     
     }
      public function check(Request $request, $CheckoutRequestID){
-         $state_ =  DB::table('payments')-> where('CheckoutRequestID',$CheckoutRequestID)->first();
-         return $state_;
+         $state_ =  DB::select('select status from payments where CheckoutRequestID =?',[$CheckoutRequestID]);
+         return $state_[0]['status'];
      }
    
 }
