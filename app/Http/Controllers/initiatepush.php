@@ -29,15 +29,19 @@ class initiatepush extends Controller
                 
                $state = json_decode($stkPushSimulation);
                
+               $ResponseCode = $state->ResponseCode;
+               
+               if ($ResponseCode == '0'){
+               
                $MerchantRequestID = $state->MerchantRequestID;
                
                $CheckoutRequestID = $state->CheckoutRequestID;
                
-               $ResponseCode = $state->ResponseCode;
+               
                
                $CustomerMessage = $state->CustomerMessage;
                
-               if ($ResponseCode == '0'){
+               
                
                     DB::insert('INSERT INTO payments
                             ( 
