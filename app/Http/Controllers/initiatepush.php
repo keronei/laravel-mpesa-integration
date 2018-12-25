@@ -38,6 +38,7 @@ class initiatepush extends Controller
                $CustomerMessage = $state->CustomerMessage;
                
                echo $CustomerMessage;
+               if ($ResponseCode == '0'){
                
                     DB::insert('INSERT INTO payments
                             ( 
@@ -48,8 +49,10 @@ class initiatepush extends Controller
                             [$MerchantRequestID,
                              $CheckoutRequestID
                            ] );
+                    return view('waiting', ['MerchantRequestID' => $MerchantRequestID,'complete'=>false]);
+                    }
                
-               
+                 return view('waiting', ['MerchantRequestID' => $MerchantRequestID,'complete'=>true]);
                
                }
                
