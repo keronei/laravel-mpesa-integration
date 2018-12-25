@@ -74,6 +74,9 @@
                 font-weight: 150;
                 font-size:15px;
             }
+            input[type="number"] {
+                width:25px;
+             }
         </style>
     </head>
         <body>
@@ -86,7 +89,7 @@
         <label>phone to send push STK</label><br>
             <input type='text' onkeypress='validate(event)' name="phonenumber" placeholder="254..." maxlength="12" minlength="10" required><br><br>
         <label>Amount to request Payment</label><br>
-            <input type="number" onkeypress='validate(event)' name="amount" placeholder="Ksh." min="1" max="99" required><br><br>
+            <input type="number" onkeypress='validate(event)' name="amount" style="width:" placeholder="Ksh." min="1" max="99" required><br><br>
             
         <input  class="send" type="submit" value="Send Request">
       </form>
