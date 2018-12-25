@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"</script>
         <style>
           html, body {
                 background-color: #fff;
@@ -115,11 +115,12 @@
     </head>
         <body>
         <div class="content">
+        <h4><?= $CustomerMessage ?></h4>
            <div class="title m-b-md">
                     Your payment is being processed. Continue shopping...
                 </div>
 
         </div>
-        <script src="http://code.jquery.com/jquery-3.3.1.min.js"</script>
+       
         </body>
 </html>        
