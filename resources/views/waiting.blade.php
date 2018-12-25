@@ -78,16 +78,16 @@
                                console.log(data);
                                
                                switch(data) {
-                                    case '{status: 0}':
+                                    case Array({status: 0}):
                                       console.log('PAID');
                                       window.alert('payment accepted!');
                                       status_completion = true;
                                       clearInterval(refreshIntervalId);
                                       break;
-                                    case '{status: 1}':
+                                    case Array({status: 1}):
                                       console.log('pending...');
                                       break;
-                                    case '{status: 2}':
+                                    case Array({status: 2}):
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
                                       status_completion = true;
