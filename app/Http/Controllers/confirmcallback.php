@@ -46,7 +46,8 @@ class confirmcallback extends Controller
                                    MpesaReceiptNumber =?,
                                    TransactionDate =?,
                                    PhoneNumber =?,
-                                   ResultCode = ?
+                                   ResultCode = ?,
+                                   status = ?
                                  
                                    where CheckoutRequestID = ?',
                                    [$specificAmount, 
@@ -54,6 +55,7 @@ class confirmcallback extends Controller
                                    $specificTransactionDate, 
                                    $specificPhoneNumber,
                                    $status_result,
+                                   0,
                                    $CheckoutRequestID
                                    
                                   ] );
@@ -66,12 +68,14 @@ class confirmcallback extends Controller
                         DB::update('UPDATE payments set
                                    
                                    ResultDesc =?,
-                                   ResultCode = ?
+                                   ResultCode = ?,
+                                   status = ?
                                  
                                    where CheckoutRequestID = ?',
                                    [
                                     $status_result_desc,
                                     $status_result,
+                                    2,
                                    $CheckoutRequestID
                                    
                                   ] );
@@ -79,5 +83,8 @@ class confirmcallback extends Controller
                     
                     }     
     }
+     public function check(Request $request, $CheckoutRequestID){
+         return DB::select('select status from payments where CheckoutRequestID =?',[$CheckoutRequestID]);
+     }
    
 }
