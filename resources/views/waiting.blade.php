@@ -58,10 +58,10 @@
         </style>
             <script>
             var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
-            var status = '<?= $complete ?>';
-                var complete = status;
-                while(!complete){
-                setInterval(function getStatus() {
+            var status_completion = '<?= $complete ?>';
+               
+                if(!status_completion){
+                var refreshIntervalId = setInterval(function getStatus() {
                      $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -80,7 +80,8 @@
                                     case 0:
                                       console.log('PAID');
                                       window.alert('payment accepted!');
-                                      complete = true;
+                                      status_completion = true;
+                                      clearInterval(refreshIntervalId);
                                       break;
                                     case 1:
                                       console.log('pending...');
@@ -88,11 +89,13 @@
                                     case 2:
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
-                                      complete = true;
+                                      status_completion = true;
+                                      clearInterval(refreshIntervalId);
                                     break;
                                     default:
                                       console.log('stray result..');
-                                      complete = true;
+                                      status_completion = true;
+                                      clearInterval(refreshIntervalId);
                                   }
                              
                             }
@@ -101,7 +104,8 @@
                     });
                 },2000);
                 }
-                if(status){
+                
+                if(status_completion){
                     window.alert('Initiation rejected your payment');
                     console.log('Payment failed to initiate');
                 }
