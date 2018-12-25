@@ -12,14 +12,16 @@ class initiatepush extends Controller
 {
         public function pay(Request $request){
             $Amount =$request->input('amount');
-            $phoneNumber =$request->input('phonenumber');
+            
+            $phoneNumber = "254".substr($request['phonenumber'], -9);
        
             $CallBackURL = 'https://integrate-payment.herokuapp.com/callback';
         
              Log::error('INITIATION PHONE RECEIVED: '.$phoneNumber);
              
              if($Amount != 0){
-        
+                echo $phoneNumber;
+        /*
                 $mpesa= new \Safaricom\Mpesa\Mpesa();
                 
                 $stkPushSimulation=$mpesa->STKPushSimulation(174379, 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919', 'CustomerPayBillOnline', $Amount, $phoneNumber, 174379, $phoneNumber, $CallBackURL, 'lozadasuplies', 'lozada', 'Payment');
@@ -65,7 +67,7 @@ class initiatepush extends Controller
                     echo "Payment Rejected, Please retry: error: ".$error_code;
                   }
                 }
-     
+     */
         }else
         {
         echo "Go buy some tea with that amount"; 
