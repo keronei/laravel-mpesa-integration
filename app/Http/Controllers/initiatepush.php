@@ -49,10 +49,10 @@ class initiatepush extends Controller
                             [$MerchantRequestID,
                              $CheckoutRequestID
                            ] );
-                    return view('waiting', ['MerchantRequestID' => $CheckoutRequestID,'complete'=>false]);
+                    return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'complete'=>false]);
                     }else{
                
-                 return view('waiting', ['MerchantRequestID' => $CheckoutRequestID,'complete'=>true]);
+                 return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'complete'=>true]);
                     }
                }
                
