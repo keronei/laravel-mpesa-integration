@@ -73,21 +73,18 @@
                         async: true,
                         success: function(data) {
                          console.log(data);
-                            if (data.status == 'success'){
- 
-                               console.log(data);
-                               
+                                                          
                                switch(data) {
-                                    case Array({status: 0}):
+                                    case  '0':
                                       console.log('PAID');
                                       window.alert('payment accepted!');
                                       status_completion = true;
                                       clearInterval(refreshIntervalId);
                                       break;
-                                    case Array({status: 1}):
+                                    case '1':
                                       console.log('pending...');
                                       break;
-                                    case Array({status: 2}):
+                                    case '2':
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
                                       status_completion = true;
@@ -99,7 +96,7 @@
                                       clearInterval(refreshIntervalId);
                                   }
                               } 
-                            }
+                            
                            
                         
                     });
