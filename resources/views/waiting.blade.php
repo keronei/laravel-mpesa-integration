@@ -68,7 +68,7 @@
                                 }
                             });
                     $.ajax({
-                        url: 'https://integrate-payment.herokuapp.com/check/'+CheckoutRequestID,
+                        url: 'check/'+CheckoutRequestID,
                         method: 'GET',
                         async: true,
                         success: function(data) {
