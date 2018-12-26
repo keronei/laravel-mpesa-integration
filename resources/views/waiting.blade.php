@@ -84,6 +84,12 @@
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
                  var status_update = (time_counter/240);
+                  
+                  if(time_counter = 240){
+                   console.log("4 mins COMPLETE");
+                   clearInterval(refreshIntervalId);
+                   }
+                  
                  final_data = round(status_update,2);
                    printbubble();
                      $.ajaxSetup({
@@ -110,7 +116,8 @@
                                     
                                       break;
                                     case 1:
-                                      console.log('pending...');
+                                      console.log('pending...seconds' + time_counter);
+                                      
                                       break;
                                     case 2:
                                       status_completion = true;
