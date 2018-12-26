@@ -15,15 +15,14 @@ class confirmcallback extends Controller
 {
     public function storeResults(Request $requests){
         
-      if($requests->isMethod('POST'))
-        {
+         $request = file_get_contents('php://input');
         
          Log::error('RECEIVED INFORMATION: '.$request);
         
         //process the received content into an array
         
         
-            $decoded  = json_decode($requests->getContent());
+            $decoded  = json_decode($requests);
 
             $status_result = $decoded->Body->stkCallback->ResultCode;
             
@@ -83,7 +82,7 @@ class confirmcallback extends Controller
                         
                     
                     }
-        }
+        
     }
      public function check(Request $request, $CheckoutRequestID){
          $state_ =  DB::table('payments')-> where('CheckoutRequestID',$CheckoutRequestID)->pluck('status');
