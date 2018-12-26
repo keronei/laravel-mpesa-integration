@@ -66,7 +66,7 @@
                
                 if(!status_completion){
                 var refreshIntervalId = setInterval(function getStatus() {
-                    time_counter++;
+                    time_counter = time_counter + 2;
                      $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -78,6 +78,7 @@
                         async: true,
                         success: function(data) {
                          console.log(data[0]);
+                          printbuble();
                                                           
                                switch(data[0]) {
                                     case  0:
@@ -139,6 +140,7 @@
 
         </div>
        <script>
+       function printbuble(){
                 $('#progress').waterbubble({
                
                  // bubble size
@@ -183,7 +185,7 @@
                
                  animation: true
                
-               });
+               });}
        </script>
         </body>
 </html>        
