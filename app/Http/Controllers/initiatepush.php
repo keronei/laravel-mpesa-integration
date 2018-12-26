@@ -56,22 +56,22 @@ class initiatepush extends Controller
                             else
                             {
                        
-                                    return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
+                                    return view('waiting', ['CheckoutRequestID' =>0, 'CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                             }
                }
                elseif(array_key_exists("errorCode",$state)){
                 
                     if(($state->errorCode) == "500.001.1001"){
                         $CustomerMessage = "Looks like you provided an invalid phone number";
-                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
+                        return view('waiting', ['CheckoutRequestID' =>0,'CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                     }else{
                          $CustomerMessage = "Bad payment request, please contact support";
-                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
+                        return view('waiting', ['CheckoutRequestID' =>0,'CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                     }
                
                }else{
                  $CustomerMessage = "Bad payment request, please contact support";
-                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
+                        return view('waiting', ['CheckoutRequestID' =>0,'CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                }
                }
      

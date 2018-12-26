@@ -78,7 +78,7 @@
                 var status_completion = '<?= $complete ?>';
                 if(!status_completion){
                 //if status_completion = false, request went well...continue processing
-                if('<? @if(!empty($CheckoutRequestID)) ?>'){
+             
                  var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
                 
                 var refreshIntervalId = setInterval(function getStatus() {
@@ -132,7 +132,7 @@
                            
                         
                     });
-                },2000);}
+                },2000);
                 }
                 
                 if(status_completion){
