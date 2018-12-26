@@ -32,27 +32,28 @@ class initiatepush extends Controller
               
               if($state->ResponseCode){
                
-               $ResponseCode = $state->ResponseCode;
-               
-               $CustomerMessage = $state->CustomerMessage;
-               
-               if ($ResponseCode == '0'){
-               
-               $MerchantRequestID = $state->MerchantRequestID;
-               
-               $CheckoutRequestID = $state->CheckoutRequestID;
-                    
-                    DB::insert('INSERT INTO payments
-                            ( 
-                            MerchantRequestID,
-                            CheckoutRequestID
-                            
-                            )   values (?, ?)',
-                            [$MerchantRequestID,
-                             $CheckoutRequestID
-                           ] );
-                    return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'CustomerMessage' =>$CustomerMessage,'complete'=>'false']);
-                    }else{
+                        $ResponseCode = $state->ResponseCode;
+                        
+                        $CustomerMessage = $state->CustomerMessage;
+                        
+                        if ($ResponseCode == '0'){
+                        
+                                $MerchantRequestID = $state->MerchantRequestID;
+                                
+                                $CheckoutRequestID = $state->CheckoutRequestID;
+                                     
+                                     DB::insert('INSERT INTO payments
+                                             ( 
+                                             MerchantRequestID,
+                                             CheckoutRequestID
+                                             
+                                             )   values (?, ?)',
+                                             [$MerchantRequestID,
+                                              $CheckoutRequestID
+                                            ] );
+                                     return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'CustomerMessage' =>$CustomerMessage,'complete'=>'false']);
+                    }
+                    else{
                
                  return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
                     }
@@ -68,17 +69,7 @@ class initiatepush extends Controller
                     }
                
                }
-               
-                if(session()->has('_paystatus')){
-                    echo "Something found in session!<br>".'<br>';
-                  if ((session()->pull('_paystatus')) == '0'){
-                    echo "Payment accepted successfully";
-                    
-                  }else{
-                    $error_code = session()->pull('_paystatus');
-                    echo "Payment Rejected, Please retry: error: ".$error_code;
-                  }
-                }
+               }
      
         }else
         {
