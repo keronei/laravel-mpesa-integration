@@ -75,10 +75,11 @@
             var time_counter = 0;
             var final_data = 0;
                printbubble();
+                var status_completion = '<?= $complete ?>';
                 if(!status_completion){
                 //if status_completion = false, request went well...continue processing
                  var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
-                 var status_completion = '<?= $complete ?>';
+                
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
                  var status_update = (time_counter/240);
