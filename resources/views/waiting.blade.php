@@ -71,12 +71,14 @@
 
         </div>
        <script>
-       var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
-            var status_completion = '<?= $complete ?>';
+      
             var time_counter = 0;
             var final_data = 0;
                printbubble();
                 if(!status_completion){
+                //if status_completion = false, request went well...continue processing
+                 var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
+                 var status_completion = '<?= $complete ?>';
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
                  var status_update = (time_counter/240);
@@ -134,6 +136,8 @@
                 if(status_completion){
                     window.alert('Initiation rejected your payment');
                     console.log('Payment failed to initiate');
+                    final_data=1;
+                    printbubble();
                 }
                                 
                 function round(value, precision) {
