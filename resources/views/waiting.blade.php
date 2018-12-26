@@ -75,13 +75,13 @@
             var status_completion = '<?= $complete ?>';
             var time_counter = 0;
             var final_data = 0;
-               printbuble();
+               printbubble();
                 if(!status_completion){
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
                  var status_update = (time_counter/240);
-                 final_data = round(status_update,1);
-                   printbuble();
+                 final_data = round(status_update,2);
+                   printbubble();
                      $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -101,6 +101,7 @@
                                       clearInterval(refreshIntervalId);
                                       final_data = 1;
                                       console.log('PAID');
+                                      printbubble();
                                       window.alert('payment accepted!');
                                     
                                       break;
@@ -111,6 +112,7 @@
                                       status_completion = true;
                                       clearInterval(refreshIntervalId);
                                       final_data = 1;
+                                      printbubble();
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
                                       
@@ -139,7 +141,7 @@
                     return Math.round(value * multiplier) / multiplier;
                 }
                            
-       function printbuble(){
+       function printbubble(){
                 $('#progress').waterbubble({
                
                  // bubble size
