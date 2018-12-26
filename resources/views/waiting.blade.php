@@ -63,10 +63,11 @@
             var status_completion = '<?= $complete ?>';
             var time_counter = 0;
             var final_data = 0;
-               
+            printbuble();
                 if(!status_completion){
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
+                    printbuble();
                      $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -78,25 +79,27 @@
                         async: true,
                         success: function(data) {
                          console.log(data[0]);
-                          printbuble();
+                          
                                                           
                                switch(data[0]) {
                                     case  0:
+                                      status_completion = true;
+                                      clearInterval(refreshIntervalId);
                                       final_data = 1;
                                       console.log('PAID');
                                       window.alert('payment accepted!');
-                                      status_completion = true;
-                                      clearInterval(refreshIntervalId);
+                                    
                                       break;
                                     case 1:
                                       console.log('pending...');
                                       break;
                                     case 2:
+                                      status_completion = true;
+                                      clearInterval(refreshIntervalId);
                                       final_data = 1;
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
-                                      status_completion = true;
-                                      clearInterval(refreshIntervalId);
+                                      
                                     break;
                                     default:
                                       final_data = 1;
