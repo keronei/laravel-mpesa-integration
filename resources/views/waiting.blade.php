@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="{!! asset('js/waterbubble.js') !!}"></script>
+        <script src="{!! asset('js/waterbubble.min.js') !!}"></script>
 
         <style>
           html, body {
@@ -124,7 +124,21 @@
                     var multiplier = Math.pow(10, precision || 0);
                     return Math.round(value * multiplier) / multiplier;
                 }
-                
+                                
+            
+</script>
+    </head>
+        <body>
+        <div class="content">
+        <h4><?= $CustomerMessage ?></h4><br>
+        <canvas id="progress"></canvas>
+
+           <div class="title m-b-md">
+                    Please wait . . .
+                </div>
+
+        </div>
+       <script>
                 $('#progress').waterbubble({
                
                  // bubble size
@@ -161,7 +175,7 @@
                
                  // custom text displayed inside the water bubble
                
-                 txt: undefined,
+                 txt: (final_data*100) + '%',
                
                 
                
@@ -170,21 +184,6 @@
                  animation: true
                
                });
-
-                
-            
-</script>
-    </head>
-        <body>
-        <div class="content">
-        <h4><?= $CustomerMessage ?></h4><br>
-        <canvas id="progress"></canvas>
-
-           <div class="title m-b-md">
-                    Please wait . . .
-                </div>
-
-        </div>
-       
+       </script>
         </body>
 </html>        
