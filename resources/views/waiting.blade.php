@@ -10,6 +10,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="{{ URL::asset('js/waterbubble.min.js') }}"></script>
+
         <style>
           html, body {
                 background-color: #fff;
@@ -59,9 +61,12 @@
             <script>
             var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
             var status_completion = '<?= $complete ?>';
+            var time_counter = 0;
+            var final_data = 0;
                
                 if(!status_completion){
                 var refreshIntervalId = setInterval(function getStatus() {
+                    time_counter++;
                      $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -76,6 +81,7 @@
                                                           
                                switch(data[0]) {
                                     case  0:
+                                      final_data = 1;
                                       console.log('PAID');
                                       window.alert('payment accepted!');
                                       status_completion = true;
@@ -85,12 +91,14 @@
                                       console.log('pending...');
                                       break;
                                     case 2:
+                                      final_data = 1;
                                       console.log('Unfortunately payment failed');
                                       window.alert('Rejected payment');
                                       status_completion = true;
                                       clearInterval(refreshIntervalId);
                                     break;
                                     default:
+                                      final_data = 1;
                                       console.log('stray result..');
                                       status_completion = true;
                                       clearInterval(refreshIntervalId);
@@ -108,14 +116,71 @@
                     console.log('Payment failed to initiate');
                 }
                 
+                var status_update = (time_counter/240);
+                
+                final_data = round(status_update,1);
+                
+                function round(value, precision) {
+                    var multiplier = Math.pow(10, precision || 0);
+                    return Math.round(value * multiplier) / multiplier;
+                }
+                
+                $('#progress').waterbubble({
+               
+                 // bubble size
+               
+                 radius: 100,
+               
+                
+               
+                 // border width
+               
+                 lineWidth: undefined,
+               
+                 // data to present
+               
+                 data: final_data,
+               
+                 // color of the water bubble
+               
+                 waterColor: 'rgba(25, 139, 201, 1)',
+               
+                
+               
+                 // text color
+               
+                 textColor: 'rgba(06, 85, 128, 0.8)',
+               
+                 // custom font family
+               
+                 font: '',
+               
+                 // show wave
+               
+                 wave: true,
+               
+                 // custom text displayed inside the water bubble
+               
+                 txt: 'processing',
+               
+                
+               
+                 // enable water fill animation
+               
+                 animation: true
+               
+               });
+
+                
             
 </script>
     </head>
         <body>
         <div class="content">
-        <h4><?= $CustomerMessage ?></h4>
+        <h4><?= $CustomerMessage ?></h4><br>
+       <script> $('#progress').waterbubble();</script>
            <div class="title m-b-md">
-                    Your payment is being processed. Continue shopping...
+                    Please wait . . .
                 </div>
 
         </div>
