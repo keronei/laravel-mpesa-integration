@@ -22,7 +22,7 @@ class confirmcallback extends Controller
         //process the received content into an array
         
         
-            $decoded  = json_decode($requests);
+            $decoded  = json_decode($request);
 
             $status_result = $decoded->Body->stkCallback->ResultCode;
             
