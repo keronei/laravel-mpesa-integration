@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="{{ URL::asset('js/waterbubble.min.js') }}"></script>
+        <script src="{!! asset('js/waterbubble.min.js') !!}"></script>
 
         <style>
           html, body {
