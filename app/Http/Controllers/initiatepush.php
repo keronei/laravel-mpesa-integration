@@ -30,7 +30,7 @@ class initiatepush extends Controller
                 
                $state = json_decode($stkPushSimulation);
               
-              if($state->ResponseCode){
+             if (array_key_exists("ResponseCode",$state)){
                
                         $ResponseCode = $state->ResponseCode;
                         
@@ -52,13 +52,14 @@ class initiatepush extends Controller
                                               $CheckoutRequestID
                                             ] );
                                      return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'CustomerMessage' =>$CustomerMessage,'complete'=>'false']);
-                    }
-                    else{
-               
-                 return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
-                    }
+                            }
+                            else
+                            {
+                       
+                                    return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
+                            }
                }
-               elseif($state->errorCode){
+               elseif(array_key_exists("errorCode",$state)){
                 
                     if(($state->errorCode) == "500.001.1001"){
                         $CustomerMessage = "Looks like you provided an invalid phone number";
@@ -68,6 +69,9 @@ class initiatepush extends Controller
                         return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
                     }
                
+               }else{
+                 $CustomerMessage = "Bad payment request, please contact support";
+                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
                }
                }
      

@@ -71,7 +71,7 @@
 
         </div>
        <script>
-      
+      console.log('<?= $complete ?>' + ': STatus completion');
             var time_counter = 0;
             var final_data = 0;
                printbubble();
