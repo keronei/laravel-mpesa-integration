@@ -102,7 +102,7 @@
                                       final_data = 1;
                                       console.log('PAID');
                                       printbubble();
-                                      window.alert('payment accepted!');
+                                      //window.alert('payment accepted!');
                                     
                                       break;
                                     case 1:
@@ -114,7 +114,7 @@
                                       final_data = 1;
                                       printbubble();
                                       console.log('Unfortunately payment failed');
-                                      window.alert('Rejected payment');
+                                      //window.alert('Rejected payment');
                                       
                                     break;
                                     default:
@@ -178,7 +178,7 @@
                
                  // custom text displayed inside the water bubble
                
-                 txt: (final_data*100) + '%',
+                 txt: round((final_data*100),0) + '%',
                
                 
                
