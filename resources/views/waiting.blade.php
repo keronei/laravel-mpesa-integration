@@ -178,7 +178,8 @@
         <body>
         <div class="content">
         <h4><?= $CustomerMessage ?></h4><br>
-       <script> $('#progress').waterbubble();</script>
+        <canvas id="progress"></canvas>
+
            <div class="title m-b-md">
                     Please wait . . .
                 </div>
