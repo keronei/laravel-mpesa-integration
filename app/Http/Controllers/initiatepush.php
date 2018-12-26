@@ -51,27 +51,27 @@ class initiatepush extends Controller
                                              [$MerchantRequestID,
                                               $CheckoutRequestID
                                             ] );
-                                     return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'CustomerMessage' =>$CustomerMessage,'complete'=>'false']);
+                                     return view('waiting', ['CheckoutRequestID' => $CheckoutRequestID,'CustomerMessage' =>$CustomerMessage,'complete'=>false]);
                             }
                             else
                             {
                        
-                                    return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
+                                    return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                             }
                }
                elseif(array_key_exists("errorCode",$state)){
                 
                     if(($state->errorCode) == "500.001.1001"){
                         $CustomerMessage = "Looks like you provided an invalid phone number";
-                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
+                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                     }else{
                          $CustomerMessage = "Bad payment request, please contact support";
-                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
+                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                     }
                
                }else{
                  $CustomerMessage = "Bad payment request, please contact support";
-                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>'true']);
+                        return view('waiting', ['CustomerMessage' =>$CustomerMessage,'complete'=>true]);
                }
                }
      
