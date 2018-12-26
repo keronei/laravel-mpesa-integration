@@ -85,7 +85,7 @@
                     time_counter = time_counter + 2;
                  var status_update = (time_counter/240);
                   
-                  if(time_counter = 240){
+                  if(time_counter == 240){
                    console.log("4 mins COMPLETE");
                    clearInterval(refreshIntervalId);
                    }
