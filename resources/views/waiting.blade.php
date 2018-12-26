@@ -58,16 +58,28 @@
                 font-size:15px;
             }
         </style>
-            <script>
-            var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
+
+    </head>
+        <body>
+        <div class="content">
+        <h4><?= $CustomerMessage ?></h4><br>
+        <canvas id="progress"></canvas>
+
+           <div class="title m-b-md">
+                    Please wait . . .
+                </div>
+
+        </div>
+       <script>
+       var CheckoutRequestID = '<?= $CheckoutRequestID ?>';
             var status_completion = '<?= $complete ?>';
             var time_counter = 0;
             var final_data = 0;
-            printbuble();
+               printbuble();
                 if(!status_completion){
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
-                    printbuble();
+                   printbuble();
                      $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -128,21 +140,7 @@
                     var multiplier = Math.pow(10, precision || 0);
                     return Math.round(value * multiplier) / multiplier;
                 }
-                                
-            
-</script>
-    </head>
-        <body>
-        <div class="content">
-        <h4><?= $CustomerMessage ?></h4><br>
-        <canvas id="progress"></canvas>
-
-           <div class="title m-b-md">
-                    Please wait . . .
-                </div>
-
-        </div>
-       <script>
+                           
        function printbuble(){
                 $('#progress').waterbubble({
                
