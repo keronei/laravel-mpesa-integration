@@ -79,6 +79,8 @@
                 if(!status_completion){
                 var refreshIntervalId = setInterval(function getStatus() {
                     time_counter = time_counter + 2;
+                 var status_update = (time_counter/240);
+                 final_data = round(status_update,1);
                    printbuble();
                      $.ajaxSetup({
                     headers: {
@@ -131,11 +133,7 @@
                     window.alert('Initiation rejected your payment');
                     console.log('Payment failed to initiate');
                 }
-                
-                var status_update = (time_counter/240);
-                
-                final_data = round(status_update,1);
-                
+                                
                 function round(value, precision) {
                     var multiplier = Math.pow(10, precision || 0);
                     return Math.round(value * multiplier) / multiplier;
