@@ -64,6 +64,8 @@ class confirmcallback extends Controller
                    //if execution reaches here, then all did went well!
                                     }
                     else{
+
+                        Log::error('RECEIVED FAIL: '.$request);
                         session()->put('_paystatus',strval($status_result));
                         DB::update('UPDATE payments set
                                    
