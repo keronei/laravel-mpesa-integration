@@ -23,8 +23,7 @@ class confirmcallback extends Controller
         
         
             $decoded  = json_decode($request);
-          
-            print_r('RECEIVED INFORMATION STEP: '.$decoded);
+
             $status_result = $decoded->Body->stkCallback->ResultCode;
             
             $status_result_desc = $decoded->Body->stkCallback->ResultDesc;
