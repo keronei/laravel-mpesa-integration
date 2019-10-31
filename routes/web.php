@@ -34,3 +34,5 @@ Route::get('/result_fail', function () {
 });
 
 Route::post('/callback','confirmcallback@storeResults');
+
+Route::get('/check/{CheckoutRequestID}','confirmcallback@check');

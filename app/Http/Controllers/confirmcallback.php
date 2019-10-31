@@ -6,25 +6,31 @@ use Illuminate\Http\Request;
 
 use DB;
 
+Use Redirect;
+
 use Illuminate\Support\Facades\Log;
+
 
 class confirmcallback extends Controller
 {
     public function storeResults(Request $requests){
         
-        $request=file_get_contents('php://input');
+         $request = file_get_contents('php://input');
         
          Log::error('RECEIVED INFORMATION: '.$request);
         
         //process the received content into an array
-        $decoded = json_decode($request);
+        
+        
+            $decoded  = json_decode($request);
 
             $status_result = $decoded->Body->stkCallback->ResultCode;
             
             $status_result_desc = $decoded->Body->stkCallback->ResultDesc;
+            $CheckoutRequestID = $decoded->Body->stkCallback->CheckoutRequestID;
             
             if ($status_result == 0){
-            
+                
                     $decoded_body = $decoded->Body->stkCallback->CallbackMetadata;
                     
                     $specificAmount = $decoded_body->Item[0]->Value;
@@ -34,29 +40,57 @@ class confirmcallback extends Controller
                     $specificPhoneNumber = $decoded_body->Item[4]->Value;
                     
     
-                    DB::insert('INSERT INTO payments
-                                   ( 
-                                   Amount,
-                                   MpesaReceiptNumber,
-                                   TransactionDate,
-                                   PhoneNumber
+                    DB::update('UPDATE payments set
+                                   
+                                   Amount =?,
+                                   MpesaReceiptNumber =?,
+                                   TransactionDate =?,
+                                   PhoneNumber =?,
+                                   ResultCode = ?,
+                                   status = ?
                                  
-                                   )   values (?, ?, ?, ?)',
+                                   where CheckoutRequestID = ?',
                                    [$specificAmount, 
                                    $specificMpesaReceiptNumber, 
                                    $specificTransactionDate, 
-                                   $specificPhoneNumber
+                                   $specificPhoneNumber,
+                                   $status_result,
+                                   0,
+                                   $CheckoutRequestID
                                    
                                   ] );
+                    
+                 
                    //if execution reaches here, then all did went well!
-                     redirect('result')->with('status', 'Payment completed Successfully!');
-                   //return view('result', ['receipt' => $specificMpesaReceiptNumber,'amount' => $specificAmount]);
                                     }
                     else{
-                     redirect('result_fail')->with('status', 'Payment failed!');
-                       // return view('result', ['reason' => $status_result_desc]);
-                    }
 
+                        Log::error('RECEIVED FAIL: '.$request);
+                        session()->put('_paystatus',strval($status_result));
+                        DB::update('UPDATE payments set
+                                   
+                                   ResultDesc =?,
+                                   ResultCode = ?,
+                                   status = ?
+                                 
+                                   where CheckoutRequestID = ?',
+                                   [
+                                    $status_result_desc,
+                                    $status_result,
+                                    2,
+                                   $CheckoutRequestID
+                                   
+                                  ] );
+                        
+                    
+                    }
         
     }
+     public function check(Request $request, $CheckoutRequestID){
+         $state_ =  DB::table('payments')-> where('CheckoutRequestID',$CheckoutRequestID)->pluck('status');
+
+
+         return $state_;
+     }
+   
 }
